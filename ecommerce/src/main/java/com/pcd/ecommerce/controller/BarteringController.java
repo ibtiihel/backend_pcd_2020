@@ -4,7 +4,9 @@ import com.pcd.ecommerce.service.BarteringService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -30,6 +32,13 @@ public class BarteringController {
     public HttpStatus deleteBarteringById(@PathVariable Long id){
         this.barteringService.deleteBarteringById(id);
          return HttpStatus.OK; }
+
+
+    @PutMapping("/imageBartering/{id}")
+    public void uploadImageBartering(@PathVariable Long id, @RequestBody MultipartFile image) throws IOException
+    {
+        barteringService.uploadImageBartering(id,image);
+    }
 
 
 }

@@ -1,14 +1,15 @@
 package com.pcd.ecommerce.service.Impl;
 
-
+import com.pcd.ecommerce.model.Product;
 import com.pcd.ecommerce.dao.ProductRepository;
 import com.pcd.ecommerce.exceptions.ResourceNotFoundException;
-import com.pcd.ecommerce.model.Product;
 import com.pcd.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,4 +71,17 @@ public class productServiceImpl implements ProductService {
         }
 
     }
+
+    @Override
+    public void uploadImage(long id, MultipartFile image) throws IOException
+    {
+        Optional<Product> productDb = productRepository.findById(id);
+        if (productDb.isPresent()){
+            Product newProduct = productDb.get();
+            newProduct.setImageProduct(image.getBytes());
+            productRepository.save(newProduct);
+        }
+
+    }
+
 }

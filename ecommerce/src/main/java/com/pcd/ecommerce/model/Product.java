@@ -9,6 +9,7 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
 
 
 @Data
@@ -29,15 +30,30 @@ public class Product {
     @Column(name="price")
     private BigDecimal price;
 
+    @Column(name="image")
+    @Lob
+    @Type(type = "org.hibernate.type.BinaryType")
+    private byte[] ImageProduct;
+
     @CreationTimestamp
     private Date createdAt;
 
     @CreationTimestamp
     private Date updatedAt;
 
+    public byte[] getImageProduct() {
+        return ImageProduct;
+    }
+
+    public void setImageProduct(byte[] ImageProduct) {
+        this.ImageProduct = ImageProduct;
+    }
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<CartItem> cartItemList;
+
+
 
 
 

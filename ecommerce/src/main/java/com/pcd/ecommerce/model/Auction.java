@@ -1,6 +1,7 @@
 package com.pcd.ecommerce.model;
 
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -25,9 +26,17 @@ public class Auction {
 
     private Date EndingDate;
 
+    @Column(name="imageAuction")
+    @Lob
+    @Type(type = "org.hibernate.type.BinaryType")
+    private byte[] ImageAuction;
 
+    public byte[] getImageAuction() {
+        return ImageAuction;
+    }
 
-
-
+    public void setImageAuction (byte[] ImageAuction) {
+        this.ImageAuction = ImageAuction;
+    }
 }
 

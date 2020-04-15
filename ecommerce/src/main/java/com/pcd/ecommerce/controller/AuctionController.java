@@ -4,7 +4,9 @@ import com.pcd.ecommerce.service.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -26,6 +28,12 @@ public class AuctionController {
     public HttpStatus deleteAuctionById(@PathVariable Long id){
         this.auctionService.deleteAuctionById(id);
         return HttpStatus.OK;
+    }
+
+    @PutMapping("/imageAuction/{id}")
+    public void uploadImageAuction(@PathVariable Long id, @RequestBody MultipartFile image) throws IOException
+    {
+        auctionService.uploadImageAuction(id,image);
     }
 
 
