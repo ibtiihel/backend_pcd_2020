@@ -1,5 +1,6 @@
 package com.pcd.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -21,9 +22,26 @@ public class Auction {
 
     private String Description;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date PostedDate;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date EndingDate;
+
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name ="seller_id")
+    private User seller;
+
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name ="buyer_id")
+    private User buyer;
+
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name ="product_id")
+    private Product product;
 
 
 

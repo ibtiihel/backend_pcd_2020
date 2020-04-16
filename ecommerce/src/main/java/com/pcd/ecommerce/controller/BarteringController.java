@@ -21,7 +21,7 @@ public class BarteringController {
     public List<Bartering> getAllBartering() {return this.barteringService.getAllBartering();}
 
     @PostMapping
-    public Bartering createBartering( @RequestBody Bartering bartering){ return this.barteringService.createBartering(bartering); }
+    public Bartering createBartering( @RequestBody Bartering bartering) throws Exception { return this.barteringService.createBartering(bartering); }
 
     @PutMapping
     public  Bartering updateBartering(@RequestBody Bartering bartering){return this.barteringService.updateBartering(bartering);}

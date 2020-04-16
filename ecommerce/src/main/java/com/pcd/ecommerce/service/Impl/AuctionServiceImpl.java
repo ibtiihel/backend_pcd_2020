@@ -1,12 +1,14 @@
 package com.pcd.ecommerce.service.Impl;
 import com.pcd.ecommerce.dao.AuctionRepository;
 import com.pcd.ecommerce.model.Auction;
+import com.pcd.ecommerce.model.Product;
+import com.pcd.ecommerce.model.User;
 import com.pcd.ecommerce.service.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import java.util.Optional;
 
 @Service
 public class AuctionServiceImpl implements AuctionService {
@@ -25,6 +27,16 @@ public class AuctionServiceImpl implements AuctionService {
     @Override
     public void deleteAuctionById(Long id) {
         this.auctionRepository.deleteById(id);
+    }
+
+    @Override
+    public Auction updateBid(long auctionId, long buyerId, double price){
+        Auction auctionDb = this.auctionRepository.findById(auctionId).get();
+        User buyer = new User();
+        buyer.setId(buyerId);
+        auctionDb.setBuyer(buyer);
+        auctionDb.setCurrentPrice(price);
+        return this.auctionRepository.save(auctionDb);
     }
 
 

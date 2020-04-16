@@ -8,5 +8,6 @@ public interface AuctionService {
     Auction getAuctionById(Long id);
     List<Auction> getAllAuction();
     void deleteAuctionById(Long id);
+    Auction updateBid(long auctionId, long buyerId, double price);
 
 }

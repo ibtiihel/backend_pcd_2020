@@ -28,16 +28,12 @@ public class User {
     private boolean active;
     private String roles;
 
-   /*public String getUserName() {
-        return firstName;
-    }
-*/
-
-
     @OneToOne
     @JoinColumn(name = "cartId")
     @JsonIgnore
     private Cart cart;
+
+
 
 
 

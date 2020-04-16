@@ -4,11 +4,14 @@ package com.pcd.ecommerce.service.Impl;
 import com.pcd.ecommerce.dao.ProductRepository;
 import com.pcd.ecommerce.exceptions.ResourceNotFoundException;
 import com.pcd.ecommerce.model.Product;
+import com.pcd.ecommerce.model.User;
 import com.pcd.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,13 +33,14 @@ public class productServiceImpl implements ProductService {
         Optional< Product > productDb = this.productRepository.findById(product.getId());
 
         if(productDb.isPresent()){
-            Product productUpdate = productDb.get();
-            productUpdate.setId(product.getId());
-            productUpdate.setName(product.getName());
-            productUpdate.setDescription((product.getDescription()));
-            productRepository.save(productUpdate);
+//            Product productUpdate = productDb.get();
+//            productUpdate.setId(product.getId());
+//            productUpdate.setName(product.getName());
+//            productUpdate.setDescription((product.getDescription()));
+//
+            return this.productRepository.save(product);
 
-            return productUpdate;
+//            return productUpdate;
         }
         else{
             throw new ResourceNotFoundException("Record not found iwth id: " + product.getId());
@@ -70,4 +74,38 @@ public class productServiceImpl implements ProductService {
         }
 
     }
+
+    @Override
+    public List<Product> getAllByUserId(long id){
+        return this.productRepository.getAllByUser_Id(id);
+
+    }
+
+    @Override
+    public Product uploadImage(long id , MultipartFile image) throws IOException {
+        Optional<Product> productDb = productRepository.findById(id);
+        if(productDb.isPresent()){
+            System.out.println("image bytes....."+image.getBytes());
+           Product productUpload = productDb.get();
+            productUpload.setProductImage(image.getBytes());
+
+           return   productRepository.save(productUpload);
+        }else{
+            throw new IOException("cannot upload image");
+        }
+
+    }
+
+    @Override
+    public void setOwner(long userId, long productId){
+        Product productDb = this.productRepository.findById(productId).get();
+        User user = new User();
+        user.setId(userId);
+        productDb.setUser(user);
+
+    }
+
+
+
+
 }

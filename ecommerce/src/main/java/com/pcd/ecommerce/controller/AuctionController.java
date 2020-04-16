@@ -28,5 +28,9 @@ public class AuctionController {
         return HttpStatus.OK;
     }
 
+    @GetMapping("/bid/{auctionId}/{buyerId}/{price}")
+    public Auction updateBid(@PathVariable long auctionId, @PathVariable long buyerId, @PathVariable double price){
+        return this.auctionService.updateBid(auctionId,buyerId,price);
+    }
 
 }
