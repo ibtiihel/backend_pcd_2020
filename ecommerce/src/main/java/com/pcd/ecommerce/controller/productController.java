@@ -54,10 +54,17 @@ public class productController {
         this.productService.deleteProduct(id);
         return HttpStatus.OK;
     }
-    @PutMapping("/image/{id}")
-    public void uploadImage(@PathVariable Long id, @RequestBody MultipartFile image) throws IOException
-    {
-        productService.uploadImage(id,image);
+
+    @GetMapping("/products/user/{id}")
+    public ResponseEntity<List<Product>> getAllByUserId(@PathVariable long id){
+        return  ResponseEntity.ok().body(this.productService.getAllByUserId(id));
+
+    }
+
+
+    @PutMapping("/products/image/{id}")
+    public Product uploadImage(@PathVariable long id, @RequestParam("myFile") MultipartFile image) throws IOException {
+        return  this.productService.uploadImage(id, image);
     }
 
 

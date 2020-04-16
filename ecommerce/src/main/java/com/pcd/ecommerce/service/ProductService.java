@@ -19,6 +19,11 @@ public interface ProductService {
 
     void deleteProduct(long id);
 
-    void uploadImage(long id, MultipartFile image) throws IOException;
+    Product uploadImage(long id, MultipartFile image) throws IOException;
+
+    void setOwner(long userId, long productId);
+
+    List<Product> getAllByUserId(long id);
+
 
 }

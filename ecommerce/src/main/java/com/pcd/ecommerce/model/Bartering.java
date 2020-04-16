@@ -17,7 +17,7 @@ public class Bartering {
     private String Title;
     private String Description;
 
-    @Column(name="imageBartering")
+  /*  @Column(name="imageBartering")
     @Lob
     @Type(type = "org.hibernate.type.BinaryType")
     private byte[] ImageBartering;
@@ -30,5 +30,23 @@ public class Bartering {
         this.ImageBartering = ImageBartering;
     }
 
+*/
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name ="source_user")
+    private User sourceUser;
+
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name ="destination_user")
+    private User destinationUser;
+
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name ="source_product")
+    private Product sourceProduct;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name ="destination_product")
+    private Product destinationProduct;
 }

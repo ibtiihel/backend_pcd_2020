@@ -1,5 +1,6 @@
 package com.pcd.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 
@@ -22,21 +23,25 @@ public class Auction {
 
     private String Description;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date PostedDate;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date EndingDate;
 
-    @Column(name="imageAuction")
-    @Lob
-    @Type(type = "org.hibernate.type.BinaryType")
-    private byte[] ImageAuction;
 
-    public byte[] getImageAuction() {
-        return ImageAuction;
-    }
+    @ManyToOne(optional = false)
+    @JoinColumn(name ="seller_id")
+    private User seller;
 
-    public void setImageAuction (byte[] ImageAuction) {
-        this.ImageAuction = ImageAuction;
-    }
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name ="buyer_id")
+    private User buyer;
+
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name ="product_id")
+    private Product product;
 }
 

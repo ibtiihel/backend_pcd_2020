@@ -11,7 +11,9 @@ public interface AuctionService {
     Auction getAuctionById(Long id);
     List<Auction> getAllAuction();
     void deleteAuctionById(Long id);
-    void uploadImageAuction(long id, MultipartFile image) throws IOException;
+    /*void uploadImageAuction(long id, MultipartFile image) throws IOException;*/
+    Auction updateBid(long auctionId, long buyerId, double price);
+
 
 
 

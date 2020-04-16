@@ -3,6 +3,7 @@ package com.pcd.ecommerce.service.Impl;
 import com.pcd.ecommerce.model.Product;
 import com.pcd.ecommerce.dao.ProductRepository;
 import com.pcd.ecommerce.exceptions.ResourceNotFoundException;
+import com.pcd.ecommerce.model.User;
 import com.pcd.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,14 +74,32 @@ public class productServiceImpl implements ProductService {
     }
 
     @Override
-    public void uploadImage(long id, MultipartFile image) throws IOException
-    {
+    public Product uploadImage(long id , MultipartFile image) throws IOException {
         Optional<Product> productDb = productRepository.findById(id);
-        if (productDb.isPresent()){
-            Product newProduct = productDb.get();
-            newProduct.setImageProduct(image.getBytes());
-            productRepository.save(newProduct);
+        if(productDb.isPresent()){
+            System.out.println("image bytes....."+image.getBytes());
+            Product productUpload = productDb.get();
+            productUpload.setProductImage(image.getBytes());
+
+            return   productRepository.save(productUpload);
+        }else{
+            throw new IOException("cannot upload image");
         }
+
+    }
+
+    @Override
+    public void setOwner(long userId, long productId){
+        Product productDb = this.productRepository.findById(productId).get();
+        User user = new User();
+        user.setId(userId);
+        productDb.setUser(user);
+
+    }
+
+    @Override
+    public List<Product> getAllByUserId(long id){
+        return this.productRepository.getAllByUser_Id(id);
 
     }
 

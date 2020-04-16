@@ -30,10 +30,10 @@ public class Product {
     @Column(name="price")
     private BigDecimal price;
 
-    @Column(name="image")
+
     @Lob
-    @Type(type = "org.hibernate.type.BinaryType")
-    private byte[] ImageProduct;
+   // @Type(type = "org.hibernate.type.BinaryType")
+    private byte[] productImage;
 
     @CreationTimestamp
     private Date createdAt;
@@ -41,17 +41,22 @@ public class Product {
     @CreationTimestamp
     private Date updatedAt;
 
-    public byte[] getImageProduct() {
-        return ImageProduct;
+    public byte[] getProductImage() { return productImage; }
+
+    public void setProductImage(byte[] ImageProduct) {
+        this.productImage = productImage;
     }
 
-    public void setImageProduct(byte[] ImageProduct) {
-        this.ImageProduct = ImageProduct;
-    }
+
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<CartItem> cartItemList;
+
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name ="user_id")
+    private User user;
 
 
 

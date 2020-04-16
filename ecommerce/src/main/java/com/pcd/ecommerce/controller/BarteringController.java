@@ -1,6 +1,7 @@
 package com.pcd.ecommerce.controller;
 import com.pcd.ecommerce.model.Bartering;
 import com.pcd.ecommerce.service.BarteringService;
+import com.pcd.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,8 @@ public class BarteringController {
     @Autowired
     private BarteringService barteringService;
 
+
+
     @GetMapping("{id}")
     public Bartering getBarteringById(@PathVariable Long id){return this.barteringService.getBarteringById(id);}
 
@@ -23,7 +26,7 @@ public class BarteringController {
     public List<Bartering> getAllBartering() {return this.barteringService.getAllBartering();}
 
     @PostMapping
-    public Bartering createBartering( @RequestBody Bartering bartering){ return this.barteringService.createBartering(bartering); }
+    public Bartering createBartering( @RequestBody Bartering bartering) throws Exception { return this.barteringService.createBartering(bartering); }
 
     @PutMapping
     public  Bartering updateBartering(@RequestBody Bartering bartering){return this.barteringService.updateBartering(bartering);}
@@ -34,11 +37,13 @@ public class BarteringController {
          return HttpStatus.OK; }
 
 
-    @PutMapping("/imageBartering/{id}")
+   /* @PutMapping("/imageBartering/{id}")
     public void uploadImageBartering(@PathVariable Long id, @RequestBody MultipartFile image) throws IOException
     {
         barteringService.uploadImageBartering(id,image);
     }
+*/
+
 
 
 }

@@ -30,11 +30,15 @@ public class AuctionController {
         return HttpStatus.OK;
     }
 
-    @PutMapping("/imageAuction/{id}")
+   /* @PutMapping("/imageAuction/{id}")
     public void uploadImageAuction(@PathVariable Long id, @RequestBody MultipartFile image) throws IOException
     {
         auctionService.uploadImageAuction(id,image);
     }
-
+*/
+   @GetMapping("/bid/{auctionId}/{buyerId}/{price}")
+   public Auction updateBid(@PathVariable long auctionId, @PathVariable long buyerId, @PathVariable double price){
+       return this.auctionService.updateBid(auctionId,buyerId,price);
+   }
 
 }

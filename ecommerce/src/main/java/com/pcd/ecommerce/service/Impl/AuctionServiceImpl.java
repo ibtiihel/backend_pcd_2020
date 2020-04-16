@@ -2,6 +2,7 @@ package com.pcd.ecommerce.service.Impl;
 import com.pcd.ecommerce.dao.AuctionRepository;
 import com.pcd.ecommerce.model.Auction;
 import com.pcd.ecommerce.model.Product;
+import com.pcd.ecommerce.model.User;
 import com.pcd.ecommerce.service.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,17 +32,21 @@ public class AuctionServiceImpl implements AuctionService {
         this.auctionRepository.deleteById(id);
     }
 
-    @Override
-    public void uploadImageAuction(long id, MultipartFile image) throws IOException
-    {
-        Optional<Auction> auctionDb = auctionRepository.findById(id);
-        if (auctionDb.isPresent()){
-            Auction newAuction = auctionDb.get();
-            newAuction.setImageAuction(image.getBytes());
-            auctionRepository.save(newAuction);
-        }
 
+    @Override
+    public Auction updateBid(long auctionId, long buyerId, double price){
+        Auction auctionDb = this.auctionRepository.findById(auctionId).get();
+        User buyer = new User();
+        buyer.setId(buyerId);
+        auctionDb.setBuyer(buyer);
+        auctionDb.setCurrentPrice(price);
+        return this.auctionRepository.save(auctionDb);
     }
+
+
+
+
+
 
 
 
