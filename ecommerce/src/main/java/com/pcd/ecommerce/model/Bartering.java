@@ -17,20 +17,8 @@ public class Bartering {
     private String Title;
     private String Description;
 
-  /*  @Column(name="imageBartering")
     @Lob
-    @Type(type = "org.hibernate.type.BinaryType")
-    private byte[] ImageBartering;
-
-    public byte[] getImageBartering() {
-        return ImageBartering;
-    }
-
-    public void setImageBartering(byte[] ImageBartering) {
-        this.ImageBartering = ImageBartering;
-    }
-
-*/
+    private byte[] barteringImage;
 
     @ManyToOne(optional = false)
     @JoinColumn(name ="source_user")

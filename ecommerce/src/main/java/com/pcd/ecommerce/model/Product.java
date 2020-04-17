@@ -41,13 +41,6 @@ public class Product {
     @CreationTimestamp
     private Date updatedAt;
 
-    public byte[] getProductImage() { return productImage; }
-
-    public void setProductImage(byte[] ImageProduct) {
-        this.productImage = productImage;
-    }
-
-
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore

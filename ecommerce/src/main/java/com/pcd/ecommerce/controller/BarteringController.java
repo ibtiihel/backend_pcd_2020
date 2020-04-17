@@ -37,12 +37,13 @@ public class BarteringController {
          return HttpStatus.OK; }
 
 
-   /* @PutMapping("/imageBartering/{id}")
-    public void uploadImageBartering(@PathVariable Long id, @RequestBody MultipartFile image) throws IOException
+    @PutMapping("/bartering/image/{id}")
+    public  Bartering uploadBartering(@PathVariable long id,@RequestParam("myFile") MultipartFile image) throws IOException
     {
-        barteringService.uploadImageBartering(id,image);
+        return this.barteringService.uploadBartering(id, image);
     }
-*/
+
+
 
 
 

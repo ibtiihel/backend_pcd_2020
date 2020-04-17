@@ -1,5 +1,6 @@
 package com.pcd.ecommerce.service;
 import com.pcd.ecommerce.model.Auction;
+import com.pcd.ecommerce.model.Product;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ public interface AuctionService {
     Auction getAuctionById(Long id);
     List<Auction> getAllAuction();
     void deleteAuctionById(Long id);
-    /*void uploadImageAuction(long id, MultipartFile image) throws IOException;*/
+    Auction uploadAuction(long id, MultipartFile image) throws IOException;
     Auction updateBid(long auctionId, long buyerId, double price);
 
 

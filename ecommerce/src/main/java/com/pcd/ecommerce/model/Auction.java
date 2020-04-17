@@ -43,5 +43,8 @@ public class Auction {
     @ManyToOne(optional = false)
     @JoinColumn(name ="product_id")
     private Product product;
+
+    @Lob
+    private byte[] auctionImage;
 }
 

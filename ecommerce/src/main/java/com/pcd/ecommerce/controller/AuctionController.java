@@ -1,5 +1,6 @@
 package com.pcd.ecommerce.controller;
 import com.pcd.ecommerce.model.Auction;
+import com.pcd.ecommerce.model.Product;
 import com.pcd.ecommerce.service.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,12 +31,12 @@ public class AuctionController {
         return HttpStatus.OK;
     }
 
-   /* @PutMapping("/imageAuction/{id}")
-    public void uploadImageAuction(@PathVariable Long id, @RequestBody MultipartFile image) throws IOException
-    {
-        auctionService.uploadImageAuction(id,image);
+    @PutMapping("/auctions/image/{id}")
+    public Auction uploadAuction(@PathVariable long id, @RequestParam("myFile") MultipartFile image) throws IOException {
+        return  this.auctionService.uploadAuction(id, image);
     }
-*/
+
+
    @GetMapping("/bid/{auctionId}/{buyerId}/{price}")
    public Auction updateBid(@PathVariable long auctionId, @PathVariable long buyerId, @PathVariable double price){
        return this.auctionService.updateBid(auctionId,buyerId,price);

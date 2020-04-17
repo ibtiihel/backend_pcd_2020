@@ -50,18 +50,7 @@ public class BarteringServiceImpl implements BarteringService {
     @Override
     public void deleteBarteringById(Long id){this.barteringRepository.deleteById(id);}
 
-   /* @Override
-    public void uploadImageBartering(long id, MultipartFile image) throws IOException
-    {
-        Optional<Bartering> barteringDb = barteringRepository.findById(id);
-        if (barteringDb.isPresent()){
-            Bartering newBartering = barteringDb.get();
-            newBartering.setImageBartering(image.getBytes());
-            barteringRepository.save(newBartering);
-        }
 
-    }
-*/
    @Override
    public void switchOwners(long user1, long product1, long user2, long product2){
 
@@ -70,6 +59,20 @@ public class BarteringServiceImpl implements BarteringService {
 
    }
 
+   @Override
+    public Bartering uploadBartering(long id, MultipartFile image) throws IOException {
+       Optional<Bartering> barteringDb = barteringRepository.findById(id);
+       if (barteringDb.isPresent()) {
+           System.out.println("image bytes....."+image.getBytes());
+           Bartering barteringUpload = barteringDb.get();
+           barteringUpload.setBarteringImage(image.getBytes());
+
+           return  barteringRepository.save(barteringUpload);
+       }
+       else {
+           throw new IOException("cannot upload image");
+       }
+   }
 
 
 }

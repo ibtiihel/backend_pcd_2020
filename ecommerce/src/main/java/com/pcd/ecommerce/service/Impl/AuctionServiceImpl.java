@@ -43,8 +43,20 @@ public class AuctionServiceImpl implements AuctionService {
         return this.auctionRepository.save(auctionDb);
     }
 
+    @Override
+    public Auction uploadAuction(long id, MultipartFile image) throws IOException {
+        Optional<Auction> auctionDb = auctionRepository.findById(id);
+        if (auctionDb.isPresent()) {
+            System.out.println("image bytes....."+image.getBytes());
+            Auction auctionUpload = auctionDb.get();
+            auctionUpload.setAuctionImage(image.getBytes());
 
-
+            return auctionRepository.save(auctionUpload);
+        }
+        else {
+            throw new IOException("cannot upload image");
+             }
+    }
 
 
 
