@@ -74,5 +74,10 @@ public class BarteringServiceImpl implements BarteringService {
        }
    }
 
+   @Override
+    public List<Bartering> getAllBySourceUser(long id){
+        return this.barteringRepository.getAllBySourceUser_Id(id);
+   }
+
 
 }

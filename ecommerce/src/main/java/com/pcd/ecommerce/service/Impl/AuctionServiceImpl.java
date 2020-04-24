@@ -59,7 +59,11 @@ public class AuctionServiceImpl implements AuctionService {
     }
 
 
+    @Override
+    public List<Auction> getAllByBuyer(long id){
+        return this.auctionRepository.getAllByBuyer_Id(id);
 
+    }
 
 
 }

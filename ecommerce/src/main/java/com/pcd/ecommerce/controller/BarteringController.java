@@ -4,6 +4,7 @@ import com.pcd.ecommerce.service.BarteringService;
 import com.pcd.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,6 +42,11 @@ public class BarteringController {
     public  Bartering uploadBartering(@PathVariable long id,@RequestParam("myFile") MultipartFile image) throws IOException
     {
         return this.barteringService.uploadBartering(id, image);
+    }
+
+   @GetMapping("/bartering/user/{id}")
+    public ResponseEntity<List<Bartering>> getAllBySourceUser(@PathVariable long id) {
+        return ResponseEntity.ok().body(this.barteringService.getAllBySourceUser(id));
     }
 
 

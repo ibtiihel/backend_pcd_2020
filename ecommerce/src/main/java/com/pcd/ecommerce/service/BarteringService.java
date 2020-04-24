@@ -16,4 +16,6 @@ public interface BarteringService {
     Bartering uploadBartering(long id, MultipartFile image) throws IOException;
 
     void switchOwners(long user1, long product1, long user2, long product2);
+
+    List<Bartering> getAllBySourceUser(long id);
 }

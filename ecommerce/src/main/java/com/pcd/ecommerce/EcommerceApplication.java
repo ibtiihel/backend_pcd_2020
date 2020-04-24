@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 
 @EnableJpaRepositories
+//@ComponentScan({"com.pcd.ecommerce", "controller", "service"})
 public class EcommerceApplication {
 
     public static void main(String[] args) {

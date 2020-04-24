@@ -51,8 +51,5 @@ public class Product {
     @JoinColumn(name ="user_id")
     private User user;
 
-
-
-
-
+    
 }

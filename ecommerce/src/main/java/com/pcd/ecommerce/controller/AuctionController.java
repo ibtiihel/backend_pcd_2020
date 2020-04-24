@@ -4,6 +4,7 @@ import com.pcd.ecommerce.model.Product;
 import com.pcd.ecommerce.service.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,5 +42,13 @@ public class AuctionController {
    public Auction updateBid(@PathVariable long auctionId, @PathVariable long buyerId, @PathVariable double price){
        return this.auctionService.updateBid(auctionId,buyerId,price);
    }
+
+   @GetMapping("/auction/user/{id}")
+   public ResponseEntity<List<Auction>> getAllByBuyer(@PathVariable long id){
+       return  ResponseEntity.ok().body(this.auctionService.getAllByBuyer(id));
+
+   }
+
+
 
 }
