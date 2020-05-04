@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface BarteringService {
-    Bartering createBartering(Bartering bartering) throws Exception;
+    Bartering createBartering(Bartering bartering);
     Bartering updateBartering(Bartering bartering);
     Bartering getBarteringById(Long id);
     List<Bartering> getAllBartering();

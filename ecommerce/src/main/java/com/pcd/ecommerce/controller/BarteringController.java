@@ -27,7 +27,7 @@ public class BarteringController {
     public List<Bartering> getAllBartering() {return this.barteringService.getAllBartering();}
 
     @PostMapping
-    public Bartering createBartering( @RequestBody Bartering bartering) throws Exception { return this.barteringService.createBartering(bartering); }
+    public Bartering createBartering( @RequestBody Bartering bartering)  { return this.barteringService.createBartering(bartering); }
 
     @PutMapping
     public  Bartering updateBartering(@RequestBody Bartering bartering){return this.barteringService.updateBartering(bartering);}
@@ -47,6 +47,11 @@ public class BarteringController {
    @GetMapping("/bartering/user/{id}")
     public ResponseEntity<List<Bartering>> getAllBySourceUser(@PathVariable long id) {
         return ResponseEntity.ok().body(this.barteringService.getAllBySourceUser(id));
+    }
+
+    @GetMapping("/bartering/switch/{user1}/{product1}/{user2}/{product2}")
+    public void switchOwners(@PathVariable long user1,@PathVariable long product1,@PathVariable long user2,@PathVariable long product2){
+         this.barteringService.switchOwners(user1,product1,user2,product2);
     }
 
 

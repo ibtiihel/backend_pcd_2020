@@ -26,17 +26,7 @@ public class BarteringServiceImpl implements BarteringService {
     }
 
     @Override
-    public Bartering createBartering(Bartering bartering) throws  Exception{
-        try{
-            Bartering bart = this.barteringRepository.save(bartering);
-            switchOwners(bart.getSourceUser().getId(),bart.getSourceProduct().getId(),bart.getDestinationUser().getId(),bart.getDestinationProduct().getId());
-            return bart ;
-        } catch (Exception e){
-            throw e ;
-        }
-
-
-    }
+    public Bartering createBartering(Bartering bartering){ return this.barteringRepository.save(bartering);}
 
     @Override
     public Bartering updateBartering(Bartering bartering){return this.barteringRepository.save(bartering);}
