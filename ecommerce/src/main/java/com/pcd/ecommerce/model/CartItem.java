@@ -16,6 +16,7 @@ public class CartItem {
     @JoinColumn(name="cartId")
     @JsonIgnore
     private Cart cart;
+    private double price;
 
     @ManyToOne
     @JoinColumn(name="productId")

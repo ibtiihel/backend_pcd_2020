@@ -1,6 +1,7 @@
 package com.pcd.ecommerce.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 
@@ -35,7 +36,8 @@ public class Auction {
     private User seller;
 
 
-    @ManyToOne(optional = false)
+    @JsonIgnore
+    @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name ="buyer_id")
     private User buyer;
 
@@ -47,4 +49,3 @@ public class Auction {
     @Lob
     private byte[] auctionImage;
 }
-

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Data
@@ -15,7 +16,7 @@ public class Cart {
     private Long cartId;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<CartItem> cartItems;
+    private Collection<CartItem> cartItems;
 
     @OneToOne
     @JoinColumn(name="customerId")
@@ -23,4 +24,11 @@ public class Cart {
     private User user;
 
     private double grandTotal;
+    @OneToOne
+    private payment payment;
+
+    public void setgrandTotal(double total) {
+        this.grandTotal=total;
+
+    }
 }

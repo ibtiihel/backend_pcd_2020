@@ -28,11 +28,11 @@ public class Product {
     private String description;
 
     @Column(name="price")
-    private BigDecimal price;
+    private double price;
 
 
     @Lob
-   // @Type(type = "org.hibernate.type.BinaryType")
+    // @Type(type = "org.hibernate.type.BinaryType")
     private byte[] productImage;
 
     @CreationTimestamp
@@ -51,5 +51,6 @@ public class Product {
     @JoinColumn(name ="user_id")
     private User user;
 
-    
+
 }
+

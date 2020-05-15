@@ -1,4 +1,5 @@
 package com.pcd.ecommerce.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 
@@ -25,7 +26,9 @@ public class Bartering {
     private User sourceUser;
 
 
-    @ManyToOne(optional = false)
+    @JsonIgnore
+    @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+
     @JoinColumn(name ="destination_user")
     private User destinationUser;
 
@@ -34,7 +37,8 @@ public class Bartering {
     @JoinColumn(name ="source_product")
     private Product sourceProduct;
 
-    @ManyToOne(optional = false)
+    @JsonIgnore
+    @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name ="destination_product")
     private Product destinationProduct;
 }
